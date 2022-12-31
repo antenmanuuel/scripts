@@ -22,7 +22,7 @@ nala fetch
 add-apt-repository universe
 
 # Installing dependencies 
-nala install git npm tmux vim nodejs htop neofetch xclip ubuntu-restricted-extras gcc default-jdk vlc ruby-full opam gufw gnome-tweak-tool flatpak
+nala install git npm tmux vim nodejs htop neofetch xclip ubuntu-restricted-extras gcc default-jdk vlc ruby-full gufw gnome-tweak-tool flatpak -y
 
 # Stop snapd services
  systemctl stop snapd && systemctl disable snapd
@@ -38,7 +38,7 @@ Pin: origin *
 Pin-Priority: -1
 EOF
 
-nala install flatpak
+nala install flatpak -y
 nala install gnome-software-plugin-flatpak
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
@@ -50,7 +50,7 @@ chmod +x .make.sh
 ./.make.sh
 cd ~
 
-apt install zsh 
+nala install zsh -y
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 chsh -s $(which zsh)
@@ -71,7 +71,9 @@ git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:-${ZSH:-~/.o
 git clone https://github.com/AdnanHodzic/auto-cpufreq.git
 cd auto-cpufreq && sudo ./auto-cpufreq-installer
 
-
+nala update
+nala upgrade
+nala install opam -y
 opam init
 eval `opam env`
 opam switch create 4.11.1
