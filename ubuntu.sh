@@ -21,8 +21,50 @@ nala fetch
 
 add-apt-repository universe
 
+
+
 # Installing dependencies 
-nala install git npm tmux vim nodejs htop neofetch xclip ubuntu-restricted-extras gcc default-jdk vlc ruby-full gufw gnome-tweak-tool flatpak -y
+nala install git npm tmux vim nodejs htop neofetch xclip ubuntu-restricted-extras gcc default-jdk vlc ruby-full gufw gnome-tweak-tool  -y
+
+# Removing Snap
+snap remove --purge firefox
+snap remove --purge thunderbird
+snap remove --purge snap-store
+snap remove --purge gnome-3-38-2004
+snap remove --purge gtk-common-themes
+snap remove --purge snapd-desktop-integration
+snap remove --purge bare
+snap remove --purge core20
+snap remove --purge powershell
+snap remove --purge core18
+snap remove --purge snapd
+nala remove -snapd -y
+
+cat <<EOF | tee /etc/apt/preferences.d/nosnap.pref
+Package: snapd
+Pin: release a=*
+Pin-Priority: -10
+EOF
+nala update
+
+apt install --install-suggests gnome-software
+add-apt-repository ppa:mozillateam/ppa
+apt install -t 'o=LP-PPA-mozillateam' firfox
+
+echo 'Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:${distro_codename}";' | tee /etc/apt/apt.conf.d/51unattended-upgrades-firefox
+
+cat <<EOF | tee /etc/apt/preferences.d/mozillateamppa
+Package: firefox*
+Pin: release o=LP-PPA-mozillateam
+Pin-Priority: 501
+EOF
+nala update
+
+
+nala install flatpak
+nala install gnome-software-plugin-flatpak
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
 
 cd ~
 git clone https://github.com/antenmanuuel/dotfiles.git
@@ -63,3 +105,22 @@ eval `opam env`
 opam install merlin
 eval `opam env`
 opam install ocaml-lsp-server
+
+egrep -c '(vmx|svm)' /proc/cpuinfo
+
+nala install qemu-kvm qemu-system qemu-utils python3 python3-pip libvirt-clients libvirt-daemon-system bridge-utils virtinst libvirt-daemon virt-manager -y
+systemctl status libvirtd.service
+virsh net-start default
+virsh net-autostart default
+virsh net-list --all
+
+usermod -aG libvirt $USER
+usermod -aG libvirt-qemu $USER
+usermod -aG kvm $USER
+usermod -aG input $USER
+usermod -aG disk $USER
+
+nala install qemu bash coreutils ovmf grep jq lsb procps python3 genisoimage usbutils util-linux sed spice-client-gtk swtpm wget xdg-user-dirs zsync unzip -y
+apt-add-repository ppa:flexiondotorg/quickemu
+nala update
+nala install quickemu -y
