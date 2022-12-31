@@ -30,10 +30,6 @@ nala install git npm tmux vim nodejs htop neofetch xclip ubuntu-restricted-extra
 # Purge snapd
 apt purge -y snapd gnome-software-plugin-snap
 
-# Remove no longer needed folders
-rm -rf ~/snap
-rm -rf /snap /var/snap /var/lib/snapd /var/cache/snapd /usr/lib/snapd
-
 # Prevent reinstall
 apt-mark hold snap snapd
 cat <<EOF | tee /etc/apt/preferences.d/snapd
@@ -47,11 +43,12 @@ nala install gnome-software-plugin-flatpak
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 
-git clone https://github.com/antenmanuuel/dotfiles.git
 cd ~
+git clone https://github.com/antenmanuuel/dotfiles.git
 cd dotfiles
 chmod +x .make.sh
 ./.make.sh
+cd ~
 
 apt install zsh 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
