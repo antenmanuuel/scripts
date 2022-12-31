@@ -19,8 +19,33 @@ apt install nala -y
 
 nala fetch
 
+add-apt-repository universe
+
 # Installing dependencies 
-nala install git npm tmux vim nodejs htop neofetch xclip ubuntu-restricted-extras gcc default-jdk vlc ruby-full opam
+nala install git npm tmux vim nodejs htop neofetch xclip ubuntu-restricted-extras gcc default-jdk vlc ruby-full opam gufw gnome-tweak-tool flatpak
+
+# Stop snapd services
+ systemctl stop snapd && systemctl disable snapd
+
+# Purge snapd
+apt purge -y snapd gnome-software-plugin-snap
+
+# Remove no longer needed folders
+rm -rf ~/snap
+rm -rf /snap /var/snap /var/lib/snapd /var/cache/snapd /usr/lib/snapd
+
+# Prevent reinstall
+apt-mark hold snap snapd
+cat <<EOF | tee /etc/apt/preferences.d/snapd
+Package: snapd
+Pin: origin *
+Pin-Priority: -1
+EOF
+
+nala install flatpak
+nala install gnome-software-plugin-flatpak
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
 
 git clone https://github.com/antenmanuuel/dotfiles.git
 cd ~
