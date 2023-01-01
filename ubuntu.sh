@@ -13,7 +13,6 @@ apt update
 apt upgrade -y
 
 # Install nala
-echo "deb-src https://deb.volian.org/volian/ scar main" | sudo tee -a /etc/apt/sources.list.d/volian-archive-scar-unstable.list
 apt update
 apt install nala -y
 
