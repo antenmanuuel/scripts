@@ -23,7 +23,7 @@ add-apt-repository universe
 
 
 # Installing dependencies 
-nala install git npm tmux vim nodejs htop neofetch xclip ubuntu-restricted-extras gcc default-jdk vlc ruby-full gufw gnome-tweak-tool  -y
+nala install git npm tmux vim nodejs htop neofetch xclip ubuntu-restricted-extras gcc default-jdk vlc ruby-full gufw   -y
 
 # Removing Snap
 snap remove --purge firefox
