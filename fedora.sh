@@ -67,22 +67,13 @@ opam install merlin
 eval `opam env`
 opam install ocaml-lsp-server
 
-dnf install qemu-kvm qemu-system qemu-utils python3 python3-pip libvirt-clients libvirt-daemon-system bridge-utils virtinst libvirt-daemon virt-manager 
-systemctl status libvirtd.service
-virsh net-start default
-virsh net-autostart default
-virsh net-list --all
 
-usermod -aG libvirt $USER
-usermod -aG libvirt-qemu $USER
-usermod -aG kvm $USER
-usermod -aG input $USER
-usermod -aG disk $USER
+grep -E --color '(vmx|svm)' /proc/cpuinfo
+lsmod | grep -i kvm
+dnf group install --with-optional virtualization
+systemctl start libvirtd
+systemctl enable libvirtd
 
-dnf install qemu bash coreutils ovmf grep jq lsb procps python3 genisoimage usbutils util-linux sed spice-client-gtk swtpm wget xdg-user-dirs zsync unzip 
-apt-add-repository ppa:flexiondotorg/quickemu
-dnf update
-dnf install quickemu 
 
 dnf copr enable rmnscnce/kernel-xanmod -y
 dnf install kernel-xanmod-edge kernel-xanmod-edge-headers
