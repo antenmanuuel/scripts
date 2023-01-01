@@ -18,52 +18,13 @@ apt install nala -y
 
 nala fetch
 
-add-apt-repository universe
-
-
-
 # Installing dependencies 
 nala install git npm tmux vim nodejs htop neofetch xclip ubuntu-restricted-extras gcc default-jdk vlc ruby-full gufw   -y
 
-# Removing Snap
-snap remove --purge firefox
-snap remove --purge thunderbird
-snap remove --purge snap-store
-snap remove --purge gnome-3-38-2004
-snap remove --purge gtk-common-themes
-snap remove --purge snapd-desktop-integration
-snap remove --purge bare
-snap remove --purge core20
-snap remove --purge powershell
-snap remove --purge core18
-snap remove --purge snapd
-nala remove -snapd -y
-
-cat <<EOF | tee /etc/apt/preferences.d/nosnap.pref
-Package: snapd
-Pin: release a=*
-Pin-Priority: -10
-EOF
-nala update
-
-apt install --install-suggests gnome-software
-add-apt-repository ppa:mozillateam/ppa
-apt install -t 'o=LP-PPA-mozillateam' firfox
-
-echo 'Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:${distro_codename}";' | tee /etc/apt/apt.conf.d/51unattended-upgrades-firefox
-
-cat <<EOF | tee /etc/apt/preferences.d/mozillateamppa
-Package: firefox*
-Pin: release o=LP-PPA-mozillateam
-Pin-Priority: 501
-EOF
-nala update
-
-
-nala install flatpak
-nala install gnome-software-plugin-flatpak
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-
+cd ~
+git clone https://github.com/popey/unsnap
+cd unsnap
+./unsnap auto
 
 cd ~
 git clone https://github.com/antenmanuuel/dotfiles.git
