@@ -56,15 +56,15 @@ cd auto-cpufreq && sudo ./auto-cpufreq-installer
 
 nala update
 nala upgrade
-nala install opam -y
-opam init
-eval `opam env`
-opam switch create 4.11.1
-opam switch set 4.11.1
-eval `opam env`
-opam install merlin
-eval `opam env`
-opam install ocaml-lsp-server
+# nala install opam -y
+# opam init
+# eval `opam env`
+# opam switch create 4.11.1
+# opam switch set 4.11.1
+# eval `opam env`
+# opam install merlin
+# eval `opam env`
+# opam install ocaml-lsp-server
 
 egrep -c '(vmx|svm)' /proc/cpuinfo
 
