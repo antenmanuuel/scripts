@@ -55,17 +55,17 @@ gem install colorls
 git clone https://github.com/AdnanHodzic/auto-cpufreq.git
 cd auto-cpufreq && sudo ./auto-cpufreq-installer
 
-dnf update
-dnf upgrade
-dnf install opam
-opam init
-eval `opam env`
-opam switch create 4.11.1
-opam switch set 4.11.1
-eval `opam env`
-opam install merlin
-eval `opam env`
-opam install ocaml-lsp-server
+ dnf update
+ dnf upgrade
+# dnf install opam
+# opam init
+# eval `opam env`
+# opam switch create 4.11.1
+# opam switch set 4.11.1
+#  eval `opam env`
+# opam install merlin
+# eval `opam env`
+# opam install ocaml-lsp-server
 
 
 grep -E --color '(vmx|svm)' /proc/cpuinfo
