@@ -8,6 +8,19 @@ fi
 username=$(id -u -n 1000)
 builddir=$(pwd)
 
+# for ~/.bashrc and /root/.bashrc
+apt() { 
+  command nala "$@"
+}
+sudo() {
+  if [ "$1" = "apt" ]; then
+    shift
+    command sudo nala "$@"
+  else
+    command sudo "$@"
+  fi
+}
+
 # Update packages list and update system
 apt update
 apt upgrade -y
