@@ -97,3 +97,11 @@ nala install qemu bash coreutils ovmf grep jq lsb procps python3 genisoimage usb
 apt-add-repository ppa:flexiondotorg/quickemu
 nala update
 nala install quickemu -y
+
+# Installing Xanmod Kernel
+# echo 'deb http://deb.xanmod.org releases main' | sudo tee /etc/apt/sources.list.d/xanmod-kernel.list
+
+# wget -qO - https://dl.xanmod.org/gpg.key | sudo apt-key --keyring /etc/apt/trusted.gpg.d/xanmod-kernel.gpg add -
+
+# sudo nala update && sudo nala install linux-xanmod-x64v3
+
