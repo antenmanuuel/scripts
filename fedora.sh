@@ -1,7 +1,7 @@
 # !/bin/bash
 # Check if Script is Run as Root
 if [[ $EUID -ne 0 ]]; then
-  echo "You must be a root user to run this script, please run sudo ./ubuntu.sh" 2>&1
+  echo "You must be a root user to run this script, please run sudo ./fedora.sh" 2>&1
   exit 1
 fi
 
@@ -20,16 +20,16 @@ dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-rel
 
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
-dnf install vlc
-dnf install gstreamer1-plugins-{bad-\*,good-\*,base} gstreamer1-plugin-openh264 gstreamer1-libav --exclude=gstreamer1-plugins-bad-free-devel
-dnf install lame\* --exclude=lame-devel
-dnf group upgrade --with-optional Multimedia
-dnf install gnome-tweaks gnome-extensions-app
+dnf install vlc -y
+dnf install gstreamer1-plugins-{bad-\*,good-\*,base} gstreamer1-plugin-openh264 gstreamer1-libav --exclude=gstreamer1-plugins-bad-free-devel -y
+dnf install lame\* --exclude=lame-devel -y
+dnf group upgrade --with-optional Multimedia -y
+dnf install gnome-tweaks gnome-extensions-app -y
 
-dnf install curl cabextract xorg-x11-font-utils fontconfig
+dnf install curl cabextract xorg-x11-font-utils fontconfig -y
 rpm -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
 
-dnf install git tmux vim nodejs npm htop neofetch xclip gcc java-11-openjdk ruby-full gufw
+dnf install git tmux vim nodejs npm htop neofetch xclip gcc java-11-openjdk ruby-full gufw  xournalpp -y
 
 cd ~
 git clone https://github.com/antenmanuuel/dotfiles.git
