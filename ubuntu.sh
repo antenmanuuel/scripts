@@ -32,7 +32,7 @@ apt install nala -y
 nala fetch
 
 # Installing dependencies 
-nala install git npm tmux vim nodejs htop neofetch xclip ubuntu-restricted-extras gcc default-jdk vlc ruby-full gufw   -y
+nala install git npm tmux vim nodejs htop neofetch xclip ubuntu-restricted-extras gcc default-jdk vlc ruby-full gufw xournalpp   -y
 
 cd ~
 git clone https://github.com/popey/unsnap
